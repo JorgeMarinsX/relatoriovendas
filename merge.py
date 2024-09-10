@@ -11,7 +11,7 @@ def juntar_csvs(pasta):
     # Iterar sobre os arquivos CSV e carregar cada um deles em um DataFrame
     for arquivo in arquivos_csv:
         caminho_arquivo = os.path.join(pasta, arquivo)
-        df = pd.read_csv(caminho_arquivo, sep=",")  # Altere o separador se necessário
+        df = pd.read_csv(caminho_arquivo, sep=",") 
         dataframes.append(df)
     
     # Concatenar todos os DataFrames em um único
