@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import mysql.connector
+from sqlalchemy import create_engine
 
 def conecta():
     load_dotenv()
@@ -9,23 +9,15 @@ def conecta():
     passwordEnv = os.getenv("password")
     dbEnv = os.getenv("db")
 
-    db = mysql.connector.connect(
-        host = hostEnv,
-        user = userEnv,
-        password = passwordEnv,
-        database = dbEnv
-        )
-
-    return db
+    # Formatar a string de conexão com SQLAlchemy
+    engine = create_engine(f'mysql+mysqlconnector://{userEnv}:{passwordEnv}@{hostEnv}/{dbEnv}')
+    
+    return engine
 
 def executa(instrucao, valores=None):
-    db = conecta()
-    cursor = db.cursor()
-    if valores:
-        cursor.execute(instrucao, valores)
-    else:
-        cursor.execute(instrucao)
-    db.commit()
-    cursor.close()
-    db.close()
-
+    engine = conecta()
+    with engine.connect() as connection:
+        if valores:
+            connection.execute(instrucao, valores)
+        else:
+            connection.execute(instrucao)

@@ -24,7 +24,7 @@ def conversaoLista():
 #Funções que tratam e normalizam os dados
 def limpaValores(dados):
     df = dados
-    values = df['Valor Contrato']
+    values = df['Valor_Contrato']
     numberValues = values.replace({'R\$': '', ',': '.'}, regex=True)
     return numberValues
 

@@ -14,7 +14,6 @@ def juntar_csvs(pasta):
         df = pd.read_csv(caminho_arquivo, sep=",") 
         dataframes.append(df)
     
-    # Concatenar todos os DataFrames em um único
     df_final = pd.concat(dataframes, ignore_index=True)
     
     return df_final
@@ -25,7 +24,3 @@ pasta = 'df/pool'
 
 # Juntar todos os CSVs em um único DataFrame
 df_final = juntar_csvs(pasta)
-
-
-
-
