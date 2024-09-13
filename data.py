@@ -31,20 +31,20 @@ def limpaValores(dados):
 def limpaValoresVendas(dados):
     # Remover espaços em branco no início/fim, remover o símbolo "R$", remover separadores de milhar (vírgula)
     # e garantir que o separador decimal (ponto) seja mantido
-    dados['Valor Contrato'] = dados['Valor Contrato'].str.strip() \
+    dados['Valor_Contrato'] = dados['Valor_Contrato'].str.strip() \
                                                        .str.replace(r'R\$', '', regex=True) \
                                                        .str.replace(',', '', regex=True) \
                                                        .str.replace(r'^\s*$', '0', regex=True)  # Substituir strings vazias por 0
-    dados['Valor Contrato'] = dados['Valor Contrato'].astype(float)
+    dados['Valor_Contrato'] = dados['Valor_Contrato'].astype(float)
     
-    dados['Valor Plano'] = dados['Valor Plano'].str.strip() \
+    dados['Valor_Plano'] = dados['Valor_Plano'].str.strip() \
                                                .str.replace(r'R\$', '', regex=True) \
                                                .str.replace(',', '', regex=True) \
                                                .str.replace(r'^\s*$', '0', regex=True)  # Substituir strings vazias por 0
-    dados['Valor Plano'] = dados['Valor Plano'].astype(float)
+    dados['Valor_Plano'] = dados['Valor_Plano'].astype(float)
 
     # Verificar os valores após a transformação
-    print("Valores após transformação:\n", dados[['Valor Contrato', 'Valor Plano']].head())
+    print("Valores após transformação:\n", dados[['Valor_Contrato', 'Valor_Plano']].head())
 
     return dados
 
@@ -71,5 +71,5 @@ def converte_uppercase(df):
 
 def normalizaDados(dados):
     resultado = converte_uppercase(dados.reset_index(drop=True))
-    resultado = resultado.dropna(subset=['Cod Cliente'])
+    resultado = resultado.dropna(subset=['Cod_Cliente'])
     return resultado
